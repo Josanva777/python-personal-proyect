@@ -1,29 +1,39 @@
 import streamlit as st
+import pandas as pd
 
-# Configuración de la página
-st.set_page_config(   
-    page_icon="📌",
-    layout="wide"
-)
+st.set_page_config(page_icon="🎮", layout="wide")
+st.title("Actividad 1 - Videojuegos")
+st.header("Descripción")
+st.markdown("Esta actividad muestra cómo crear un DataFrame a partir de un diccionario con información de videojuegos y cómo visualizar tanto los datos como las secciones importantes del código.")
 
-st.title("Momento 2 - Actividad 1")
+videojuegos = {
+    "Título": ["The Legend of Zelda", "Super Mario Odyssey", "God of War", "Red Dead Redemption 2"],
+    "Plataforma": ["Nintendo Switch", "Nintendo Switch", "PlayStation 4", "PlayStation 4"],
+    "Año": [2017, 2017, 2018, 2018],
+    "Desarrollador": ["Nintendo", "Nintendo", "Santa Monica Studio", "Rockstar Games"]
+}
+df_videojuegos = pd.DataFrame(videojuegos)
+st.subheader("DataFrame de Videojuegos")
+st.dataframe(df_videojuegos)
 
-st.header("Descripción de la actividad")
-st.markdown("""
-Esta actividad es una introducción práctica a Python y a las estructuras de datos básicas.
-En ella, exploraremos los conceptos fundamentales de Python y aprenderemos a utilizar variables,
-tipos de datos, operadores, y las estructuras de datos más utilizadas como listas, tuplas,
-diccionarios y conjuntos.
-""")
+codigo = '''
+import streamlit as st
+import pandas as pd
 
-st.header("Objetivos de aprendizaje")
+st.set_page_config(page_icon="🎮", layout="wide")
+st.title("Actividad 1 - Videojuegos")
+st.header("Descripción")
+st.markdown("Esta actividad muestra cómo crear un DataFrame a partir de un diccionario con información de videojuegos y cómo visualizar tanto los datos como las secciones importantes del código.")
 
-st.markdown("""
-- Comprender los tipos de datos básicos en Python
-- Aprender a utilizar variables y operadores
-- Dominar las estructuras de datos fundamentales
-- Aplicar estos conocimientos en ejemplos prácticos
-""")
-
-st.header("Solución")
-
+videojuegos = {
+    "Título": ["The Legend of Zelda", "Super Mario Odyssey", "God of War", "Red Dead Redemption 2"],
+    "Plataforma": ["Nintendo Switch", "Nintendo Switch", "PlayStation 4", "PlayStation 4"],
+    "Año": [2017, 2017, 2018, 2018],
+    "Desarrollador": ["Nintendo", "Nintendo", "Santa Monica Studio", "Rockstar Games"]
+}
+df_videojuegos = pd.DataFrame(videojuegos)
+st.subheader("DataFrame de Videojuegos")
+st.dataframe(df_videojuegos)
+'''
+st.subheader("Código")
+st.code(codigo, language="python")
