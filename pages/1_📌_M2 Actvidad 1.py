@@ -47,19 +47,19 @@ calificaciones = pd.Series([9.3, 8.5, 7.8])
 df_series = pd.DataFrame({"Título": titulos, "Plataforma": plataformas, "Calificación": calificaciones})
 st.dataframe(df_series)
 
-# 5. Archivo CSV (local) - Corregido
+# 5. Archivo CSV (local) - 
 st.subheader("DataFrame desde CSV")
-df_csv = pd.read_csv("data/videojuegos.csv")  # Añadida la carpeta "data/"
+df_csv = pd.read_csv("data/videojuegos.csv")
 st.dataframe(df_csv)
 
-# 6. Archivo Excel (local) - Corregido
+# 6. Archivo Excel (local) - 
 st.subheader("DataFrame desde Excel")
-df_excel = pd.read_excel("data/videojuegos.xlsx")  # Añadida la carpeta "data/"
+df_excel = pd.read_excel("data/videojuegos.xlsx") 
 st.dataframe(df_excel)
 
-# 7. Archivo JSON (local) - Corregido
+# 7. Archivo JSON (local) - 
 st.subheader("DataFrame desde JSON")
-df_json = pd.read_json("data/videojuegos.json")  # Añadida la carpeta "data/"
+df_json = pd.read_json("data/videojuegos.json") 
 st.dataframe(df_json)
 
 # 8. URL
