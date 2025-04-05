@@ -3,3 +3,4 @@
 .venv
 
 # Archivos de configuración local
+requirements.txt
