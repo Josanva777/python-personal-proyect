@@ -1,29 +1,41 @@
 import streamlit as st
+import pandas as pd
 
-# Configuración de la página
-st.set_page_config(   
-    page_icon="📌",
-    layout="wide"
-)
+# Cargar el dataset
+@st.cache_data
+def load_data():
+    return pd.read_csv("data/estudiantes_colombia.csv")
 
-st.title("Momento 2 - Actividad 2")
+data = load_data()
 
-st.header("Descripción de la actividad")
-st.markdown("""
-Esta actividad es una introducción práctica a Python y a las estructuras de datos básicas.
-En ella, exploraremos los conceptos fundamentales de Python y aprenderemos a utilizar variables,
-tipos de datos, operadores, y las estructuras de datos más utilizadas como listas, tuplas,
-diccionarios y conjuntos.
-""")
+# Título de la aplicación
+st.title("Análisis de Estudiantes en Colombia")
 
-st.header("Objetivos de aprendizaje")
+# Mostrar las primeras y últimas 5 filas
+st.subheader("Primeras y Últimas 5 Filas del Dataset")
+st.write("Primeras 5 filas:")
+st.dataframe(data.head())
+st.write("Últimas 5 filas:")
+st.dataframe(data.tail())
 
-st.markdown("""
-- Comprender los tipos de datos básicos en Python
-- Aprender a utilizar variables y operadores
-- Dominar las estructuras de datos fundamentales
-- Aplicar estos conocimientos en ejemplos prácticos
-""")
+# Mostrar resumen del dataset
+st.subheader("Resumen del Dataset")
+if st.checkbox("Mostrar .info()"):
+    buffer = st.empty()
+    data.info(buf=buffer)
+    st.text(buffer._value)
+if st.checkbox("Mostrar .describe()"):
+    st.write(data.describe())
 
-st.header("Solución")
+# Seleccionar columnas específicas
+st.subheader("Seleccionar Columnas")
+columns = st.multiselect("Selecciona las columnas a mostrar:", data.columns.tolist())
+if columns:
+    st.dataframe(data[columns])
 
+# Filtrar estudiantes por promedio
+st.subheader("Filtrar Estudiantes por Promedio")
+min_promedio = st.slider("Selecciona el promedio mínimo:", min_value=float(data["promedio"].min()), max_value=float(data["promedio"].max()), value=float(data["promedio"].min()))
+filtered_data = data[data["promedio"] >= min_promedio]
+st.write(f"Estudiantes con promedio mayor o igual a {min_promedio}:")
+st.dataframe(filtered_data)
