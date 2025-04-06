@@ -32,6 +32,16 @@ st.subheader("Seleccionar Columnas")
 columns = st.multiselect("Selecciona las columnas a mostrar:", data.columns.tolist())
 if columns:
     st.dataframe(data[columns])
+    for column in columns:
+        if pd.api.types.is_numeric_dtype(data[column]):
+            if column == "edad":
+                selected_range = st.slider(f"Selecciona el rango para {column}:", min_value=0, max_value=80, value=(0, 80))
+            else:
+                min_val, max_val = float(data[column].min()), float(data[column].max())
+                selected_range = st.slider(f"Selecciona el rango para {column}:", min_value=min_val, max_value=max_val, value=(min_val, max_val))
+            data = data[(data[column] >= selected_range[0]) & (data[column] <= selected_range[1])]
+    st.subheader("Datos Filtrados")
+    st.dataframe(data)
 
 # Filtrar estudiantes por promedio
 st.subheader("Filtrar Estudiantes por Promedio")
